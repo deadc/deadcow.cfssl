@@ -1,0 +1,19 @@
+---
+# defaults file for deadcow.cfssl
+
+cfssl_url: https://pkg.cfssl.org/R1.2
+cfssl_ssl_dir: /opt/cfssl
+
+cfssl_pki_common_name: Kubernetes
+cfssl_pki_country: GB
+cfssl_pki_state: London
+cfssl_pki_locality: London
+cfssl_pki_organisation: Kubernetes
+cfssl_pki_organisational_unit: CA
+
+cfssl_pki_hosts:
+  - 192.168.52.12
+  - 192.168.52.13
+  - 192.168.52.14
+  - 127.0.0.1
+  - localhost

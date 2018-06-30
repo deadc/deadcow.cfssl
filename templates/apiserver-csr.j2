@@ -1,0 +1,18 @@
+
+{
+  "CN": "apiserver",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "hosts": {{ cfssl_pki_hosts | unique | list | to_nice_json }},
+  "names": [
+    {
+      "C": "{{ cfssl_pki_country }}",
+      "L": "{{ cfssl_pki_locality }}",
+      "O": "{{ cfssl_pki_organisation }}",
+      "OU": "{{ cfssl_pki_organisational_unit }}",
+      "ST": "{{ cfssl_pki_state }}"
+    }
+  ]
+}

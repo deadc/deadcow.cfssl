@@ -1,0 +1,116 @@
+---
+
+  file:
+    /opt/cfssl:
+      exists: true
+      owner: root
+      group: root
+      filetype: directory
+
+    /opt/cfssl/admin-user-key.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/admin-user.csr:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/admin-user.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/apiserver-key.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/apiserver.csr:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/apiserver.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/ca-key.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/ca.csr:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/ca.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/templates:
+      exists: true
+      owner: root
+      group: root
+      filetype: directory
+
+    /opt/cfssl/templates/admin-user-csr.json:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/templates/apiserver-csr.json:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/templates/ca-config.json:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/templates/ca-csr.json:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/templates/worker-csr.json:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/worker-key.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/worker.csr:
+      exists: true
+      owner: root
+      group: root
+      filetype: file
+
+    /opt/cfssl/worker.pem:
+      exists: true
+      owner: root
+      group: root
+      filetype: file

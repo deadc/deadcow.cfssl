@@ -1,0 +1,73 @@
+---
+# tasks file for deadcow.cfssl
+
+  - name: Install cfssl
+    get_url:
+      url: "{{ cfssl_url }}/{{ item }}_linux-amd64"
+      dest: "/usr/local/bin/{{ item }}"
+      mode: 0755
+    with_items:
+      - cfssl
+      - cfssljson
+    delegate_to: localhost
+    tags:
+      - cfssl
+
+  - name: Create {{ cfssl_ssl_dir }} and templates dir
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "{{ cfssl_ssl_dir }}"
+      - "{{ cfssl_ssl_dir }}/templates"
+    delegate_to: localhost
+    tags:
+      - cfssl
+
+  - name: Copy CA templates
+    template:
+      src: "{{ item }}.j2"
+      dest: "{{ cfssl_ssl_dir }}/templates/{{ item }}.json"
+    delegate_to: localhost
+    with_items:
+      - ca-config
+      - ca-csr
+    tags:
+      - cfssl
+
+  - name: Generate CA
+    shell: cfssl gencert -initca templates/ca-csr.json | cfssljson -bare ca
+    args:
+      chdir: "{{ cfssl_ssl_dir }}"
+      creates: "{{ cfssl_ssl_dir }}/ca.pem"
+    delegate_to: localhost
+    tags:
+      - cfssl
+
+  - name: Copy csr templates
+    template:
+      src: "{{ item }}-csr.j2"
+      dest: "{{ cfssl_ssl_dir }}/templates/{{ item }}-csr.json"
+    delegate_to: localhost
+    with_items:
+      - apiserver
+      - admin-user
+      - worker
+    tags:
+      - cfssl
+
+  - name: Generate certificates
+    shell: "cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=templates/ca-config.json -profile={{ item.profile }} templates/{{ item.name }}-csr.json | cfssljson -bare {{ item.name }}"
+    args:
+      chdir: "{{ cfssl_ssl_dir }}"
+      creates: "{{ cfssl_ssl_dir }}/{{ item.name }}.pem"
+    delegate_to: localhost
+    with_items:
+      - name: apiserver
+        profile: server
+      - name: admin-user
+        profile: client
+      - name: worker
+        profile: client
+    tags:
+      - cfssl
